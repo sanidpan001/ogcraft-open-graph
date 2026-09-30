@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OgCraft — Free Meta Tag & Open Graph Generator</title>
+<meta name="description" content="OgCraft is a free meta tag generator with live Google SERP and Facebook, X and LinkedIn card previews, a completeness score, image-URL checker, JSON-LD templates and Next.js / Nuxt snippets. No signup needed." />
+<meta name="keywords" content="meta tag generator, open graph generator, twitter card generator, og tags checker, seo meta tags tool" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { --grape:#6D28D9; --pink:#EC4899; --ink:#17102B; }
+  body { background:#17102B; }
+  .grad-text { background:linear-gradient(92deg,#A78BFA 0%,#EC4899 60%,#F9A8D4 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .grad-btn { background:linear-gradient(92deg,#6D28D9,#EC4899); }
+  .grad-btn:hover { filter:brightness(1.12); }
+  .card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09); }
+  .field { background:#100A22; border:1px solid rgba(255,255,255,.12); color:#F5F3FF; }
+  .field:focus { outline:none; border-color:#A78BFA; box-shadow:0 0 0 3px rgba(109,40,217,.35); }
+  .tab-active { background:linear-gradient(92deg,#6D28D9,#EC4899); color:#fff; }
+  .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .no-print {}
+  pre.code { white-space:pre; }
+  @media print { .no-print { display:none !important; } }
+  .serp-title { color:#1a0dab; }
+  details.faq summary::-webkit-details-marker { display:none; }
+</style>
+</head>
+<body class="text-slate-100 antialiased">
+
+<!-- Sticky header -->
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#17102B]/90 backdrop-blur">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 h-16 flex items-center justify-between">
+    <a href="#top" class="text-2xl font-extrabold tracking-tight"><span class="grad-text">OgCraft</span></a>
+    <nav class="flex items-center gap-5 text-sm font-medium">
+      <a href="#top" class="text-slate-200 hover:text-white">Home</a>
+      <a href="https://fixoraa.tech" target="_blank" rel="noopener" class="text-slate-200 hover:text-white">More Tools</a>
+    </nav>
+  </div>
+</header>
+
+<!-- TOP AD (verbatim) -->
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pt-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <div class="origin-top scale-[0.44] sm:scale-100 shrink-0">
+        <script>
+          atOptions = { 'key' : '4e68ac77881c17fe128a46565d9a4e8c', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+        </script>
+        <script src="https://www.highrevenueformat.com/4e68ac77881c17fe128a46565d9a4e8c/invoke.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL -->
+<main class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+  <div class="text-center mb-8">
+    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Meta Tag &amp; <span class="grad-text">Open Graph</span> Generator</h1>
+    <p class="mt-3 text-slate-300 max-w-2xl mx-auto">Type your page details once — watch your Google snippet and social cards update live, get a completeness score, and copy production-ready tags.</p>
+    <span class="inline-flex items-center gap-1.5 mt-4 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold px-3 py-1.5">
+      <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd"/></svg>
+      Unlimited Free Usage · No signup · No watermark
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+
+    <!-- ============ LEFT: BUILDER FORM ============ -->
+    <section class="lg:col-span-3 card rounded-2xl p-5 sm:p-7" aria-label="Meta tag builder">
+      <h2 class="text-xl font-bold mb-1">Builder</h2>
+      <p class="text-sm text-slate-400 mb-6">Everything updates live on the right as you type. Your input never leaves this page.</p>
+
+      <div class="space-y-5">
+        <div>
+          <label for="f-title" class="block text-sm font-semibold mb-1.5">Page title</label>
+          <input id="f-title" type="text" maxlength="140" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="e.g. The Ultimate Guide to Sourdough Baking" />
+          <div class="flex justify-between mt-1 text-xs"><span class="text-slate-500">Used in &lt;title&gt;, og:title, twitter:title</span><span id="c-title" class="text-slate-400 font-mono">0 / 60</span></div>
+        </div>
+
+        <div>
+          <label for="f-desc" class="block text-sm font-semibold mb-1.5">Meta description</label>
+          <textarea id="f-desc" rows="3" maxlength="400" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="One or two sentences that make people click…"></textarea>
+          <div class="flex justify-between mt-1 text-xs"><span class="text-slate-500">Your Google snippet copy</span><span id="c-desc" class="text-slate-400 font-mono">0 / 160</span></div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="f-url" class="block text-sm font-semibold mb-1.5">Canonical URL</label>
+            <input id="f-url" type="url" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="https://example.com/my-page" />
+          </div>
+          <div>
+            <label for="f-site" class="block text-sm font-semibold mb-1.5">Site name</label>
+            <input id="f-site" type="text" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="e.g. Crumb & Craft" />
+          </div>
+        </div>
+
+        <div>
+          <label for="f-image" class="block text-sm font-semibold mb-1.5">Social image URL (og:image)</label>
+          <input id="f-image" type="url" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="https://example.com/images/cover.jpg" />
+          <div id="img-check" class="mt-2 text-xs space-y-1"></div>
+          <p class="text-xs text-slate-500 mt-1">Tip: 1200 × 630 px (JPG, PNG or WebP) works best on Facebook, X and LinkedIn.</p>
+        </div>
+
+        <div>
+          <label for="f-alt" class="block text-sm font-semibold mb-1.5">Image alt text <span class="text-slate-500 font-normal">(og:image:alt)</span></label>
+          <input id="f-alt" type="text" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="e.g. Fresh sourdough loaf on a wooden board" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="f-type" class="block text-sm font-semibold mb-1.5">og:type</label>
+            <select id="f-type" class="field w-full rounded-xl px-4 py-2.5 text-sm">
+              <option value="website">website</option>
+              <option value="article">article</option>
+              <option value="product">product</option>
+              <option value="profile">profile</option>
+            </select>
+          </div>
+          <div>
+            <label for="f-twcard" class="block text-sm font-semibold mb-1.5">Twitter card type</label>
+            <select id="f-twcard" class="field w-full rounded-xl px-4 py-2.5 text-sm">
+              <option value="summary_large_image">summary_large_image</option>
+              <option value="summary">summary</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-5">
+          <div>
+            <label for="f-twsite" class="block text-sm font-semibold mb-1.5">X handle <span class="text-slate-500 font-normal">(optional)</span></label>
+            <input id="f-twsite" type="text" class="field w-full rounded-xl px-4 py-2.5 text-sm" placeholder="@yourhandle" />
+          </div>
+          <div>
+            <label for="f-locale" class="block text-sm font-semibold mb-1.5">Locale</label>
+            <input id="f-locale" type="text" class="field w-full rounded-xl px-4 py-2.5 text-sm" value="en_US" />
+          </div>
+          <div>
+            <label for="f-theme" class="block text-sm font-semibold mb-1.5">Theme color</label>
+            <input id="f-theme" type="color" value="#6D28D9" class="field w-full rounded-xl h-[42px] px-2 py-1" />
+          </div>
+        </div>
+
+        <div>
+          <label for="f-robots" class="block text-sm font-semibold mb-1.5">Robots</label>
+          <select id="f-robots" class="field w-full rounded-xl px-4 py-2.5 text-sm">
+            <option value="index, follow">index, follow</option>
+            <option value="noindex, follow">noindex, follow</option>
+            <option value="index, nofollow">index, nofollow</option>
+            <option value="noindex, nofollow">noindex, nofollow</option>
+          </select>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-1">
+          <button id="btn-sample" type="button" class="rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-slate-200 hover:bg-white/5">Load sample</button>
+          <button id="btn-clear" type="button" class="rounded-xl border border-white/15 px-4 py-2.5 text-sm font-semibold text-slate-200 hover:bg-white/5">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RIGHT: LIVE PREVIEWS + SCORE ============ -->
+    <section class="lg:col-span-2 space-y-6" aria-label="Live previews">
+      <!-- Completeness score -->
+      <div class="card rounded-2xl p-5">
+        <div class="flex items-center gap-4">
+          <div class="relative w-20 h-20 shrink-0">
+            <svg viewBox="0 0 80 80" class="w-20 h-20 -rotate-90">
+              <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="9"/>
+              <circle id="score-ring" cx="40" cy="40" r="34" fill="none" stroke="url(#scoreGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6" style="transition:stroke-dashoffset .5s ease"/>
+              <defs><linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6D28D9"/><stop offset="1" stop-color="#EC4899"/></linearGradient></defs>
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span id="score-num" class="text-xl font-extrabold">0</span>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-bold">Completeness score</h2>
+            <p class="text-xs text-slate-400">10 checks: canonical, og:image, lengths, card types &amp; more.</p>
+          </div>
+        </div>
+        <ul id="score-list" class="mt-4 space-y-1.5 text-xs"></ul>
+      </div>
+
+      <!-- Google SERP preview -->
+      <div class="card rounded-2xl p-5">
+        <h2 class="font-bold mb-3 flex items-center gap-2"><span class="text-lg">🔍</span> Google SERP preview</h2>
+        <div class="rounded-xl bg-white text-slate-900 p-4">
+          <div class="flex items-center gap-3">
+            <div id="serp-fav" class="w-8 h-8 rounded-full bg-gradient-to-br from-[#6D28D9] to-[#EC4899] text-white flex items-center justify-center text-sm font-bold shrink-0">O</div>
+            <div class="min-w-0">
+              <div id="serp-site" class="text-sm text-slate-800 truncate">Your Site</div>
+              <div id="serp-url" class="text-xs text-slate-500 truncate">https://example.com › page</div>
+            </div>
+          </div>
+          <div id="serp-title" class="serp-title text-xl leading-snug mt-1.5 line-clamp-2 hover:underline cursor-pointer">Your page title appears here</div>
+          <div id="serp-desc" class="text-sm text-slate-600 mt-1 line-clamp-2">Your meta description appears here, roughly as Google would show it in search results.</div>
+        </div>
+        <p id="serp-warn" class="text-xs text-amber-300 mt-2 hidden">⚠ Truncated — keep titles under ~60 chars and descriptions under ~160 chars.</p>
+      </div>
+
+      <!-- Facebook preview -->
+      <div class="card rounded-2xl p-5">
+        <h2 class="font-bold mb-3 flex items-center gap-2"><span class="text-lg">📘</span> Facebook link preview</h2>
+        <div class="rounded-xl overflow-hidden bg-white text-slate-900 border border-slate-200">
+          <div id="fb-img" class="aspect-[1.91/1] bg-gradient-to-br from-[#6D28D9]/20 to-[#EC4899]/20 flex items-center justify-center text-slate-400 text-xs text-center px-4">No og:image — add one to control this preview</div>
+          <div class="p-3 bg-slate-50 border-t border-slate-200">
+            <div id="fb-domain" class="text-[11px] uppercase text-slate-500 truncate">example.com</div>
+            <div id="fb-title" class="font-semibold text-[15px] leading-snug line-clamp-2 mt-0.5">Your page title appears here</div>
+            <div id="fb-desc" class="text-[13px] text-slate-600 line-clamp-2 mt-0.5">Your description appears here.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- X preview -->
+      <div class="card rounded-2xl p-5">
+        <h2 class="font-bold mb-3 flex items-center gap-2"><span class="text-lg">𝕏</span> X (Twitter) card preview</h2>
+        <div class="rounded-2xl overflow-hidden bg-black text-white border border-white/15">
+          <div id="x-img" class="aspect-[2/1] bg-gradient-to-br from-[#6D28D9]/30 to-[#EC4899]/30 flex items-center justify-center text-slate-400 text-xs text-center px-4">No twitter:image — add one for a large card</div>
+          <div class="p-3">
+            <div id="x-title" class="font-bold text-[15px] leading-snug line-clamp-2">Your page title appears here</div>
+            <div id="x-desc" class="text-[13px] text-slate-400 line-clamp-2 mt-0.5">Your description appears here.</div>
+            <div id="x-domain" class="text-[13px] text-slate-500 mt-1 truncate">🔗 example.com</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LinkedIn preview -->
+      <div class="card rounded-2xl p-5">
+        <h2 class="font-bold mb-3 flex items-center gap-2"><span class="text-lg">💼</span> LinkedIn post preview</h2>
+        <div class="rounded-xl overflow-hidden bg-white text-slate-900 border border-slate-200">
+          <div class="px-4 py-2.5 flex items-center gap-2 border-b border-slate-100">
+            <div class="w-7 h-7 rounded bg-[#0A66C2] text-white flex items-center justify-center text-xs font-extrabold">in</div>
+            <div><div id="li-site" class="text-[13px] font-semibold leading-tight">Your Site</div><div class="text-[11px] text-slate-500">1,234 followers · now</div></div>
+          </div>
+          <div id="li-img" class="aspect-[1.91/1] bg-gradient-to-br from-[#6D28D9]/20 to-[#EC4899]/20 flex items-center justify-center text-slate-400 text-xs text-center px-4">No og:image — add one to control this preview</div>
+          <div class="p-3">
+            <div id="li-title" class="font-semibold text-[15px] leading-snug line-clamp-2">Your page title appears here</div>
+            <div id="li-domain" class="text-[13px] text-slate-500 truncate mt-0.5">example.com</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ GENERATED CODE ============ -->
+  <section class="card rounded-2xl p-5 sm:p-7 mt-6" aria-label="Generated code">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+      <h2 class="text-xl font-bold">Generated code</h2>
+      <div class="flex flex-wrap gap-2" role="tablist" aria-label="Code formats">
+        <button data-tab="meta" role="tab" class="tab-btn tab-active rounded-lg px-3.5 py-2 text-xs font-semibold border border-white/10">Meta tags</button>
+        <button data-tab="org" role="tab" class="tab-btn rounded-lg px-3.5 py-2 text-xs font-semibold border border-white/10 text-slate-300">JSON-LD · Organization</button>
+        <button data-tab="article" role="tab" class="tab-btn rounded-lg px-3.5 py-2 text-xs font-semibold border border-white/10 text-slate-300">JSON-LD · Article</button>
+        <button data-tab="next" role="tab" class="tab-btn rounded-lg px-3.5 py-2 text-xs font-semibold border border-white/10 text-slate-300">Next.js</button>
+        <button data-tab="nuxt" role="tab" class="tab-btn rounded-lg px-3.5 py-2 text-xs font-semibold border border-white/10 text-slate-300">Nuxt</button>
+      </div>
+    </div>
+    <div class="rounded-xl overflow-hidden border border-white/10 bg-[#0D0720]">
+      <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/10 bg-white/[.03]">
+        <span id="code-filename" class="text-xs font-mono text-slate-400">&lt;head&gt; snippet</span>
+        <div class="flex gap-2">
+          <button id="btn-download" type="button" class="rounded-lg border border-white/15 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-white/5">Download</button>
+          <button id="btn-copy" type="button" class="grad-btn rounded-lg px-4 py-1.5 text-xs font-bold text-white">Copy code</button>
+        </div>
+      </div>
+      <pre class="code p-4 text-[12.5px] leading-relaxed text-emerald-200/90 overflow-x-auto max-h-[480px] overflow-y-auto"><code id="code-out"></code></pre>
+    </div>
+    <p id="copy-msg" class="text-xs text-emerald-300 mt-2 h-4"></p>
+    <p class="text-xs text-slate-500 mt-1">Paste the <strong class="text-slate-300">Meta tags</strong> block inside the <code class="text-slate-300">&lt;head&gt;</code> of your page. Framework snippets drop straight into Next.js <code class="text-slate-300">app/layout.js</code> or a Nuxt <code class="text-slate-300">&lt;script setup&gt;</code> block.</p>
+  </section>
+</main>
+
+<!-- BOTTOM AD (verbatim) -->
+<div class="no-print mx-auto max-w-6xl px-4 sm:px-6 pb-4" role="complementary" aria-label="Advertisement">
+  <div class="mx-auto text-center" style="max-width:728px">
+    <span class="block text-[10px] tracking-[0.18em] uppercase text-slate-400 mb-1.5">Advertisement</span>
+    <div class="flex justify-center overflow-hidden">
+      <script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="464498"></script>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SEO ARTICLE ============ -->
+<section class="mx-auto max-w-6xl px-4 sm:px-6 pb-4">
+  <article class="card rounded-2xl p-6 sm:p-10 prose prose-invert max-w-none">
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-6">The Complete Guide to Meta Tags, Open Graph &amp; Twitter Cards</h2>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">Why meta tags still decide who clicks in 2026</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Every time your page appears in a search result, a chat message, a social feed, or a link preview, it is wearing clothes it did not choose — unless you dressed it yourself with meta tags. Meta tags are small snippets of HTML that live in the <code>&lt;head&gt;</code> of your page and tell machines what your page is about, what it should be called, which image represents it, and which address is the canonical one. Humans rarely see them directly, yet they shape almost every first impression your content ever makes. A well-written title tag and meta description can lift click-through rates from a Google results page dramatically, while a missing or broken Open Graph image can turn a viral moment on social media into a grey, text-only box that nobody taps. Search engines, social networks, messaging apps, and AI assistants all read these tags before they ever render your page. In 2026, with content competing across search, social, and chat surfaces simultaneously, meta tags are no longer an SEO checkbox — they are your brand's packaging, and packaging sells.</p>
+    <p class="text-slate-300 leading-relaxed mb-4">The good news is that the fundamentals have barely changed in a decade. There are only a handful of tags that truly matter, each with a clear job, and once you understand them you can generate a complete, correct set for any page in under two minutes. The bad news is that most pages still get them wrong: titles that get cut off mid-word, descriptions that trail into nothing, share images that never load because somebody pasted a relative path, and Twitter cards that were never configured at all. This guide walks through every essential tag, explains exactly what each one does, shows you the character limits that matter, and teaches you how to validate your work like a professional — including the free generator and live previews at the top of this page, which let you see your Google snippet and social cards update in real time as you type.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">The essential meta tags every page needs</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Start with the core trio. The <code>&lt;title&gt;</code> tag sets the clickable headline in search results and the text on the browser tab; it is widely considered the single most influential on-page ranking element you fully control. Keep it under roughly 60 characters, because Google displays about 600 pixels of title text before truncating with an ellipsis — a title that gets cut off mid-thought looks unfinished and earns fewer clicks. Put the most important keywords near the front, make it read like a human headline rather than a keyword list, and give every page on your site a unique title. Next comes the meta description: a one-to-two sentence summary of about 150 to 160 characters. Google does not use it directly for ranking, but it is the copy that appears beneath your title in search results, which makes it your free advertising slot. Write it like ad copy — promise a benefit, include a call to action, and match the searcher's intent. Finally, the canonical link tag tells search engines which URL is the authoritative version of the page when duplicates exist, such as print versions, tracking parameters, or http versus https variants. A missing canonical tag is one of the most common technical SEO oversights on small sites, and it can split your ranking signals across several near-identical URLs.</p>
+    <p class="text-slate-300 leading-relaxed mb-4">Beyond the trio, two supporting tags round out the basics. The robots meta tag controls how crawlers treat the page — the default <code>index, follow</code> is fine for public content, while <code>noindex</code> keeps thin or private pages out of search results without needing server configuration. The theme-color meta tag sets the browser chrome color on mobile devices, a small polish detail that makes your site feel native and intentional when someone opens it on a phone. None of these tags are difficult, but together they form the foundation that every advanced tag builds on. The completeness checker in the tool above scores exactly these fundamentals, flagging whichever pieces you have forgotten before you ship.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">Open Graph: how Facebook, LinkedIn, WhatsApp and more read your page</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Open Graph began as Facebook's protocol for turning web pages into rich objects in the social graph, but it has become the universal language of link previews. LinkedIn, WhatsApp, Telegram, Slack, Discord, and Pinterest all read Open Graph tags when someone pastes your link. The four required properties are <code>og:title</code>, <code>og:type</code>, <code>og:image</code>, and <code>og:url</code>, and you should also set <code>og:description</code> and <code>og:site_name</code> on every page. The og:title can mirror your page title or be slightly more conversational, since it appears in a social context rather than a search context. The og:type is usually <code>website</code> for homepages and landing pages and <code>article</code> for blog posts and news — articles unlock extra properties like publish time and author. The og:url should be the canonical address of the page, which ties together shares of the same content posted with different tracking parameters so their engagement counts merge instead of fragmenting.</p>
+    <p class="text-slate-300 leading-relaxed mb-4">The og:image deserves its own strategy, because the image is what stops the scroll. Social networks crop preview images aggressively, so design for the standard 1200 by 630 pixel landscape format, keep critical text and faces inside a safe central zone, and export as JPG for photographs or PNG for graphics with sharp text. Always use an absolute URL starting with https — a relative path like <code>/images/cover.jpg</code> is the single most common reason share images fail to load, because the crawler has no page context to resolve it against. Add <code>og:image:alt</code> with a plain-language description for accessibility, and remember that Facebook, LinkedIn, and WhatsApp cache your tags aggressively: after fixing a broken image you will usually need to re-scrape the URL in each network's debugger before the new preview appears. The image-URL checker built into the tool above validates the absolute-URL rule and the file extension instantly, catching the two mistakes that cause the vast majority of broken previews.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">Twitter Cards: owning how your links look on X</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">X, the platform formerly known as Twitter, reads Open Graph tags as a fallback but gives you finer control through its own Twitter Card tags. The key decision is <code>twitter:card</code>, which takes either <code>summary</code> for a small thumbnail on the side or <code>summary_large_image</code> for the big, full-width image that dominates the timeline. For almost every marketing page, blog post, and product launch, the large-image card is the right choice — it is dramatically more clickable. You can reuse your Open Graph image for <code>twitter:image</code>, or supply a separate crop tuned to X's display. The <code>twitter:title</code> and <code>twitter:description</code> tags let you tailor copy specifically for the X audience, which tends to reward punchier, more opinionated wording than a Google snippet does. If your brand has an X presence, add <code>twitter:site</code> with your handle so the card attributes the content to you. One quirk worth knowing: X caches cards too, and its validator historically required the page to be publicly reachable with no login wall before it would render a preview — test with a staging URL that crawlers can actually reach.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">Writing titles and descriptions that earn the click</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Tags are the container; copy is the content. The best title tags follow a simple formula: primary keyword or topic first, a differentiator second, and the brand last, separated by a dash or pipe. Compare "Sourdough Guide | Crumb and Craft" with "Crumb and Craft — Home of the World's Most Obsessively Detailed Sourdough Baking Guide for Beginners" — the second will be truncated into meaninglessness while the first survives intact on every device. Front-load the words that carry the promise, because truncation always eats the end first. For meta descriptions, think of the search results page as a shelf of competing products: everyone is selling relevance, so you win by selling specificity. Numbers, timeframes, and concrete outcomes outperform vague adjectives — "Cut your sourdough failure rate with a 7-day starter schedule" beats "Learn all about delicious sourdough baking today." Keep the description honest, because a click earned with a misleading snippet becomes a bounce, and bounce behavior eventually costs you the ranking you were trying to win.</p>
+    <p class="text-slate-300 leading-relaxed mb-4">Length discipline matters more than most people think. Google measures titles in pixels, not characters, so a title full of wide capital letters like W and M truncates sooner than one in lowercase — the 60-character guideline is a safe approximation, not a guarantee. Descriptions get roughly 155 to 160 characters on desktop and sometimes fewer on mobile. The live counters in the generator above turn red the moment you cross these thresholds, and the simulated Google preview truncates your text exactly the way the real results page would, so you can rewrite until the whole message survives. Treat every title and description as a headline you are A/B testing against nine competitors: specific beats generic, complete beats truncated, and a clear promise beats clever wordplay.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">The share image: your highest-leverage two minutes</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">If you take one action after reading this guide, make it this: give every important page a deliberate 1200 by 630 share image. Pages with a strong og:image consistently earn multiples of the engagement of pages with a broken, missing, or auto-cropped image, because on social feeds the image is the content and the headline is the caption. Design these images like miniature billboards: one focal visual, no more than seven words of large text, high contrast that survives small screens, and branding subtle enough not to look like an ad. Avoid relying on your site's logo alone — a logo on a blank background tells the scroller nothing about why they should care. Photographs of people, products in use, or dramatic before-and-after comparisons outperform abstract graphics almost everywhere they have been tested. Export at double density if your design tool allows it, keep the file under a megabyte so crawlers fetch it quickly, and serve it over https from a stable URL you will not rename next quarter, because old shares keep pointing at that image indefinitely.</p>
+    <p class="text-slate-300 leading-relaxed mb-4">Then verify. Each major network offers a free debugger — Facebook's Sharing Debugger, X's Card Validator, and LinkedIn's Post Inspector — that shows you exactly what the crawler sees and lets you clear the cache after a fix. Run every new template through all three before launch day, not after. Check that the image loads, that the title is not truncated, and that the description reads correctly. This five-minute ritual prevents the all-too-common launch-day discovery that your big announcement is sharing as a grey box with no image, which is a problem no amount of promotion budget can fully repair.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">JSON-LD structured data: the tags behind the tags</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Meta tags control how your page looks when shared; structured data controls how search engines understand what your page is. JSON-LD is Google's preferred format: a block of JSON inside a script tag that describes your content in the vocabulary of schema.org. An Organization block tells Google your brand's name, logo, and official URL, which feeds the knowledge panels and brand signals that build trust. An Article block marks up headlines, publish dates, authors, and images, making your content eligible for rich results like Top Stories carousels. Unlike meta tags, JSON-LD is invisible to users and forgiving to write, since it is just data — but it must be valid JSON and it must match what is actually on the page, because markup that contradicts visible content can trigger manual penalties. The generator above produces both templates pre-filled with your inputs, so you can paste them into your page without learning the schema.org vocabulary from scratch.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">Shipping tags in modern frameworks</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">If you build with Next.js, the App Router's Metadata API has replaced manual head tags: you export a metadata object from your layout or page, and the framework renders every tag, canonical link, Open Graph property, and Twitter card for you, with type safety and automatic escaping. Nuxt offers the useHead composable, which lets you declare the same tags from any component with a clean, reactive API. Both approaches beat hand-writing tags because the values stay in sync with your content — change the page title in one place and every tag, preview card, and structured-data block follows. The framework tabs in the tool above generate ready-to-paste Next.js metadata and Nuxt useHead snippets from the same form, so whether you maintain a hand-coded site or a modern framework app, you leave with code that drops straight into your codebase. Whichever stack you use, keep one principle: generate tags from your content model, never hardcode them per page, so a rebrand or URL change propagates everywhere automatically.</p>
+
+    <h3 class="text-xl font-bold mt-8 mb-3">A validation checklist before you publish</h3>
+    <p class="text-slate-300 leading-relaxed mb-4">Run through this checklist for every page that matters. First, confirm the title is unique, under 60 characters, and reads as a complete thought even if truncated. Second, confirm the meta description is present, under 160 characters, and written as a promise rather than a summary. Third, confirm the canonical URL is absolute, uses https, and matches the address you actually want indexed. Fourth, confirm every Open Graph required property is set and that og:image is an absolute https URL pointing to a real image file with a crawler-safe extension. Fifth, confirm the Twitter card type is summary_large_image unless you have a specific reason to choose otherwise. Sixth, view the page with JavaScript disabled or through a text-mode fetch to make sure the tags are in the raw HTML — tags injected only by client-side JavaScript are invisible to many crawlers. Seventh, run the URL through each network's debugger and clear caches after fixes. The completeness score at the top of this page automates the first five checks; the last two are a two-minute manual habit that separates professional launches from hopeful ones. Meta tags are a small surface area with an outsized impact — master them once, template them forever, and every page you ever publish will arrive in the world dressed for the occasion.</p>
+  </article>
+</section>
+
+<!-- ============ FAQS ============ -->
+<section id="faqs" class="mx-auto max-w-6xl px-4 sm:px-6 pb-10">
+  <div class="card rounded-2xl p-6 sm:p-10">
+    <h2 class="text-2xl font-extrabold mb-6">Frequently asked questions</h2>
+    <div class="space-y-3">
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">What are meta tags and why do they matter?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">Meta tags are HTML elements in a page's <code>&lt;head&gt;</code> that describe the page to machines — search engines, social networks, and messaging apps. The title tag and meta description control your Google search snippet, while Open Graph and Twitter Card tags control link previews on Facebook, X, LinkedIn, WhatsApp, and Slack. They matter because they shape the first impression of your content everywhere it appears, directly affecting click-through rates and social engagement.</p>
+      </details>
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">What is the difference between Open Graph and Twitter Cards?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">Open Graph is the universal protocol for link previews, read by Facebook, LinkedIn, WhatsApp, Telegram, Slack, and Discord. Twitter Cards are X's own layer on top: X falls back to Open Graph tags when Twitter-specific ones are missing, but <code>twitter:card</code> gives you explicit control over whether the preview renders as a small summary or a large image card. Best practice is to set both — Open Graph for everywhere, Twitter Cards tuned for the X timeline.</p>
+      </details>
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">What size should my og:image be?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">The widely recommended size is 1200 × 630 pixels (a 1.91:1 ratio), which displays crisply on Facebook, X, and LinkedIn. Keep the file under 1 MB, use JPG for photographs or PNG for graphics with text, serve it over https, and always use an absolute URL — relative paths are the most common reason share images fail to load. Keep important text and faces away from the edges, since networks crop previews aggressively.</p>
+      </details>
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">Why isn't my image showing when I share my link?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">The usual culprits are a relative image URL instead of an absolute https URL, an unsupported file type such as SVG, a page blocked behind a login, or a stale cache — social networks cache link previews aggressively. Fix the tag, then re-scrape the URL in Facebook's Sharing Debugger, X's Card Validator, or LinkedIn's Post Inspector to clear the cache and preview the result.</p>
+      </details>
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">How long should my title tag and meta description be?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">Keep title tags under about 60 characters (Google shows roughly 600 pixels before truncating) and meta descriptions between 150 and 160 characters. Put the most important words first, since truncation always cuts the end. The live counters and the simulated Google preview in the generator above show you exactly where your text gets cut off, so you can rewrite until the full message survives.</p>
+      </details>
+      <details class="faq rounded-xl border border-white/10 bg-white/[.03] px-5 py-4">
+        <summary class="font-semibold cursor-pointer list-none flex justify-between items-center">Do meta keywords still matter for SEO?<span class="text-pink-400 text-xl leading-none">+</span></summary>
+        <p class="text-sm text-slate-300 mt-3 leading-relaxed">No — Google has ignored the meta keywords tag for well over a decade, and Bing treats it only as a potential spam signal. Do not waste time on it. The tags that actually move the needle are the title tag, the meta description, the canonical link, Open Graph tags, Twitter Card tags, and JSON-LD structured data — exactly the set the generator above produces.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are meta tags and why do they matter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Meta tags are HTML elements in a page's head that describe the page to machines such as search engines and social networks. The title tag and meta description control your Google search snippet, while Open Graph and Twitter Card tags control link previews on Facebook, X, LinkedIn, WhatsApp, and Slack, directly affecting click-through rates and engagement." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between Open Graph and Twitter Cards?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Open Graph is the universal protocol for link previews, read by Facebook, LinkedIn, WhatsApp, Telegram, Slack, and Discord. Twitter Cards are X's own layer on top: X falls back to Open Graph tags when Twitter-specific ones are missing, but twitter:card gives explicit control over summary versus large-image rendering. Best practice is to set both." }
+    },
+    {
+      "@type": "Question",
+      "name": "What size should my og:image be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The recommended size is 1200 by 630 pixels (1.91:1 ratio). Keep the file under 1 MB, use JPG for photos or PNG for graphics, serve it over https, and always use an absolute URL since relative paths are the most common reason share images fail to load." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why isn't my image showing when I share my link?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Common causes are a relative image URL instead of absolute https, an unsupported file type such as SVG, a login-walled page, or a stale social-network cache. Fix the tag, then re-scrape the URL in Facebook's Sharing Debugger, X's Card Validator, or LinkedIn's Post Inspector." }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should my title tag and meta description be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Keep title tags under about 60 characters and meta descriptions between 150 and 160 characters, with the most important words first since truncation cuts the end." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do meta keywords still matter for SEO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Google has ignored the meta keywords tag for well over a decade and Bing treats it only as a potential spam signal. Focus on the title tag, meta description, canonical link, Open Graph tags, Twitter Card tags, and JSON-LD structured data instead." }
+    }
+  ]
+}
+</script>
+
+<footer class="border-t border-white/10">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <a href="#top" class="text-xl font-extrabold"><span class="grad-text">OgCraft</span></a>
+    <p class="text-xs text-slate-500">Free meta tag, Open Graph &amp; Twitter Card generator. Unlimited free usage.</p>
+    <a href="https://fixoraa.tech" target="_blank" rel="noopener" class="text-sm text-slate-300 hover:text-white font-medium">More Tools →</a>
+  </div>
+</footer>
+
+<script>
+/* __PURE_START__ */
+function escHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function escJs(s) {
+  return String(s == null ? '' : s)
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\n/g, '\\n')
+    .replace(/\r/g, '');
+}
+function trunc(s, n) {
+  s = String(s == null ? '' : s);
+  return s.length > n ? s.slice(0, n).trimEnd() + '…' : s;
+}
+function isAbsoluteUrl(u) {
+  return /^https?:\/\//i.test(String(u == null ? '' : u).trim());
+}
+function stripQuery(u) {
+  return String(u == null ? '' : u).split('?')[0].split('#')[0];
+}
+var IMG_OK_EXT = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'avif', 'bmp'];
+var IMG_BAD_EXT = ['svg', 'ico', 'tif', 'tiff'];
+function checkImageUrl(url) {
+  url = String(url == null ? '' : url).trim();
+  if (!url) return { state: 'empty', messages: ['No image URL entered yet. Add one to unlock rich social previews.'] };
+  var messages = [];
+  var ok = true;
+  if (!isAbsoluteUrl(url)) {
+    ok = false;
+    messages.push('Not an absolute URL — start it with https:// so crawlers can reach the image.');
+  } else if (!/^https:\/\//i.test(url)) {
+    messages.push('Plain http detected — most networks prefer https images.');
+  }
+  var clean = stripQuery(url);
+  var ext = clean.indexOf('.') !== -1 ? clean.split('.').pop().toLowerCase() : '';
+  if (IMG_OK_EXT.indexOf(ext) !== -1) {
+    messages.push('Extension .' + ext + ' is safe for Facebook, X and LinkedIn crawlers.');
+  } else if (IMG_BAD_EXT.indexOf(ext) !== -1) {
+    ok = false;
+    messages.push('Extension .' + ext + ' is risky — social networks may refuse to render it. Use JPG, PNG or WebP.');
+  } else {
+    ok = false;
+    messages.push('Unrecognized or missing image extension — crawlers expect .jpg, .png or .webp.');
+  }
+  return { state: ok ? 'ok' : 'bad', messages: messages };
+}
+function lengthStatus(title, description) {
+  title = String(title == null ? '' : title);
+  description = String(description == null ? '' : description);
+  var tW = title.length > 60, dW = description.length > 160;
+  return {
+    titleLen: title.length, descLen: description.length,
+    titleWarn: tW, descWarn: dW,
+    titleMsg: tW
+      ? 'Title is ' + title.length + ' chars — Google truncates around 60 chars (600 px).'
+      : 'Title length is safe for Google (' + title.length + '/60).',
+    descMsg: dW
+      ? 'Description is ' + description.length + ' chars — Google truncates around 155–160 chars.'
+      : 'Description length is safe (' + description.length + '/160).'
+  };
+}
+function scoreMeta(f) {
+  f = f || {};
+  var img = checkImageUrl(f.image);
+  var ls = lengthStatus(f.title, f.description);
+  var checks = [
+    { id: 'title',       label: 'Page title present',                  pass: !!String(f.title || '').trim(),        tip: 'Add a <title> — the most important on-page SEO element you control.' },
+    { id: 'desc',        label: 'Meta description present',            pass: !!String(f.description || '').trim(),  tip: 'Write a meta description — it controls your Google snippet copy.' },
+    { id: 'canonical',   label: 'Canonical URL set (absolute)',        pass: isAbsoluteUrl(f.url),                 tip: 'Set a canonical URL so search engines know the preferred address.' },
+    { id: 'ogimage',     label: 'og:image present',                    pass: !!String(f.image || '').trim(),        tip: 'Add an og:image — posts without one get far fewer clicks.' },
+    { id: 'ogimage-abs', label: 'og:image uses absolute http(s) URL',  pass: isAbsoluteUrl(f.image),                tip: 'og:image must be an absolute URL starting with https://.' },
+    { id: 'ogimage-ext', label: 'og:image has a crawler-safe format',  pass: img.state === 'ok',                   tip: 'Use .jpg, .png or .webp — avoid SVG and ICO.' },
+    { id: 'titlelen',    label: 'Title within ~60 chars',              pass: !ls.titleWarn,                        tip: ls.titleMsg },
+    { id: 'desclen',     label: 'Description within ~160 chars',       pass: !ls.descWarn,                         tip: ls.descMsg },
+    { id: 'ogtype',      label: 'og:type set',                         pass: !!String(f.ogType || '').trim(),      tip: 'Set og:type — usually "website" or "article".' },
+    { id: 'twcard',      label: 'Twitter card type set',               pass: !!String(f.twitterCard || '').trim(), tip: 'Set twitter:card — "summary_large_image" for big previews.' }
+  ];
+  var passed = checks.filter(function (c) { return c.pass; }).length;
+  return { score: passed * 10, passed: passed, total: checks.length, checks: checks };
+}
+function buildMetaTags(f) {
+  f = f || {};
+  var L = [];
+  L.push('<!-- Primary meta tags -->');
+  L.push('<title>' + escHtml(f.title) + '</title>');
+  L.push('<meta name="title" content="' + escHtml(f.title) + '" />');
+  L.push('<meta name="description" content="' + escHtml(f.description) + '" />');
+  if (String(f.robots || '').trim()) L.push('<meta name="robots" content="' + escHtml(f.robots) + '" />');
+  if (isAbsoluteUrl(f.url)) L.push('<link rel="canonical" href="' + escHtml(f.url) + '" />');
+  if (String(f.themeColor || '').trim()) L.push('<meta name="theme-color" content="' + escHtml(f.themeColor) + '" />');
+  L.push('');
+  L.push('<!-- Open Graph -->');
+  L.push('<meta property="og:type" content="' + escHtml(f.ogType || 'website') + '" />');
+  if (isAbsoluteUrl(f.url)) L.push('<meta property="og:url" content="' + escHtml(f.url) + '" />');
+  L.push('<meta property="og:title" content="' + escHtml(f.title) + '" />');
+  L.push('<meta property="og:description" content="' + escHtml(f.description) + '" />');
+  if (String(f.image || '').trim()) {
+    L.push('<meta property="og:image" content="' + escHtml(f.image) + '" />');
+    if (String(f.imageAlt || '').trim()) L.push('<meta property="og:image:alt" content="' + escHtml(f.imageAlt) + '" />');
+  }
+  if (String(f.siteName || '').trim()) L.push('<meta property="og:site_name" content="' + escHtml(f.siteName) + '" />');
+  if (String(f.locale || '').trim()) L.push('<meta property="og:locale" content="' + escHtml(f.locale) + '" />');
+  L.push('');
+  L.push('<!-- Twitter Card -->');
+  L.push('<meta name="twitter:card" content="' + escHtml(f.twitterCard || 'summary_large_image') + '" />');
+  if (isAbsoluteUrl(f.url)) L.push('<meta name="twitter:url" content="' + escHtml(f.url) + '" />');
+  L.push('<meta name="twitter:title" content="' + escHtml(f.title) + '" />');
+  L.push('<meta name="twitter:description" content="' + escHtml(f.description) + '" />');
+  if (String(f.image || '').trim()) L.push('<meta name="twitter:image" content="' + escHtml(f.image) + '" />');
+  if (String(f.twitterSite || '').trim()) L.push('<meta name="twitter:site" content="' + escHtml(f.twitterSite) + '" />');
+  return L.join('\n');
+}
+function buildJsonLd(f, kind) {
+  f = f || {};
+  var siteName = String(f.siteName || '').trim() || 'Your Organization';
+  var pageUrl = isAbsoluteUrl(f.url) ? String(f.url).trim() : 'https://example.com/your-page';
+  var hasImg = !!String(f.image || '').trim();
+  if (kind === 'article') {
+    var article = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: String(f.title || '').trim() || 'Article headline',
+      description: String(f.description || '').trim(),
+      author: { '@type': 'Organization', name: siteName },
+      publisher: { '@type': 'Organization', name: siteName },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl }
+    };
+    if (hasImg) {
+      article.image = [String(f.image).trim()];
+      article.publisher.logo = { '@type': 'ImageObject', url: String(f.image).trim() };
+    }
+    return JSON.stringify(article, null, 2);
+  }
+  var org = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: pageUrl
+  };
+  if (hasImg) org.logo = String(f.image).trim();
+  if (String(f.description || '').trim()) org.description = String(f.description).trim();
+  return JSON.stringify(org, null, 2);
+}
+function buildNextMeta(f) {
+  f = f || {};
+  var q = function (s) { return "'" + escJs(s) + "'"; };
+  var L = [];
+  L.push('// app/layout.js (Next.js App Router)');
+  L.push('export const metadata = {');
+  L.push('  title: ' + q(f.title) + ',');
+  L.push('  description: ' + q(f.description) + ',');
+  if (isAbsoluteUrl(f.url)) L.push('  alternates: { canonical: ' + q(f.url) + ' },');
+  if (String(f.robots || '').trim()) L.push('  robots: ' + q(f.robots) + ',');
+  L.push('  openGraph: {');
+  L.push('    type: ' + q(f.ogType || 'website') + ',');
+  if (isAbsoluteUrl(f.url)) L.push('    url: ' + q(f.url) + ',');
+  L.push('    title: ' + q(f.title) + ',');
+  L.push('    description: ' + q(f.description) + ',');
+  if (String(f.siteName || '').trim()) L.push('    siteName: ' + q(f.siteName) + ',');
+  if (String(f.locale || '').trim()) L.push('    locale: ' + q(f.locale) + ',');
+  if (String(f.image || '').trim()) L.push('    images: [{ url: ' + q(f.image) + (String(f.imageAlt || '').trim() ? ', alt: ' + q(f.imageAlt) : '') + ' }],');
+  L.push('  },');
+  L.push('  twitter: {');
+  L.push('    card: ' + q(f.twitterCard || 'summary_large_image') + ',');
+  L.push('    title: ' + q(f.title) + ',');
+  L.push('    description: ' + q(f.description) + ',');
+  if (String(f.image || '').trim()) L.push('    images: [' + q(f.image) + '],');
+  if (String(f.twitterSite || '').trim()) L.push('    site: ' + q(f.twitterSite) + ',');
+  L.push('  },');
+  L.push('};');
+  return L.join('\n');
+}
+function buildNuxtHead(f) {
+  f = f || {};
+  var q = function (s) { return "'" + escJs(s) + "'"; };
+  var L = [];
+  L.push('// inside <script setup> (Nuxt 3)');
+  L.push('useHead({');
+  L.push('  title: ' + q(f.title) + ',');
+  L.push('  meta: [');
+  L.push('    { name: \'description\', content: ' + q(f.description) + ' },');
+  if (String(f.robots || '').trim()) L.push('    { name: \'robots\', content: ' + q(f.robots) + ' },');
+  if (String(f.themeColor || '').trim()) L.push('    { name: \'theme-color\', content: ' + q(f.themeColor) + ' },');
+  L.push('    { property: \'og:type\', content: ' + q(f.ogType || 'website') + ' },');
+  if (isAbsoluteUrl(f.url)) L.push('    { property: \'og:url\', content: ' + q(f.url) + ' },');
+  L.push('    { property: \'og:title\', content: ' + q(f.title) + ' },');
+  L.push('    { property: \'og:description\', content: ' + q(f.description) + ' },');
+  if (String(f.image || '').trim()) {
+    L.push('    { property: \'og:image\', content: ' + q(f.image) + ' },');
+    if (String(f.imageAlt || '').trim()) L.push('    { property: \'og:image:alt\', content: ' + q(f.imageAlt) + ' },');
+  }
+  if (String(f.siteName || '').trim()) L.push('    { property: \'og:site_name\', content: ' + q(f.siteName) + ' },');
+  if (String(f.locale || '').trim()) L.push('    { property: \'og:locale\', content: ' + q(f.locale) + ' },');
+  L.push('    { name: \'twitter:card\', content: ' + q(f.twitterCard || 'summary_large_image') + ' },');
+  if (isAbsoluteUrl(f.url)) L.push('    { name: \'twitter:url\', content: ' + q(f.url) + ' },');
+  L.push('    { name: \'twitter:title\', content: ' + q(f.title) + ' },');
+  L.push('    { name: \'twitter:description\', content: ' + q(f.description) + ' },');
+  if (String(f.image || '').trim()) L.push('    { name: \'twitter:image\', content: ' + q(f.image) + ' },');
+  if (String(f.twitterSite || '').trim()) L.push('    { name: \'twitter:site\', content: ' + q(f.twitterSite) + ' },');
+  L.push('  ],');
+  if (isAbsoluteUrl(f.url)) {
+    L.push('  link: [');
+    L.push('    { rel: \'canonical\', href: ' + q(f.url) + ' }');
+    L.push('  ]');
+  } else {
+    L.push('  link: []');
+  }
+  L.push('});');
+  return L.join('\n');
+}
+/* __PURE_END__ */
+
+/* ---------- UI wiring (not pure; uses DOM) ---------- */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var FIELDS = ['f-title', 'f-desc', 'f-url', 'f-site', 'f-image', 'f-alt', 'f-type', 'f-twcard', 'f-twsite', 'f-locale', 'f-theme', 'f-robots'];
+  var activeTab = 'meta';
+
+  function readForm() {
+    return {
+      title: $('f-title').value, description: $('f-desc').value, url: $('f-url').value.trim(),
+      siteName: $('f-site').value, image: $('f-image').value.trim(), imageAlt: $('f-alt').value,
+      ogType: $('f-type').value, twitterCard: $('f-twcard').value, twitterSite: $('f-twsite').value.trim(),
+      locale: $('f-locale').value.trim(), themeColor: $('f-theme').value, robots: $('f-robots').value
+    };
+  }
+  function saveForm() {
+    try { localStorage.setItem('ogcraft-form-v1', JSON.stringify(readForm())); } catch (e) {}
+  }
+  function loadForm() {
+    try {
+      var raw = localStorage.getItem('ogcraft-form-v1');
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      FIELDS.forEach(function (id) {
+        var key = { 'f-title': 'title', 'f-desc': 'description', 'f-url': 'url', 'f-site': 'siteName', 'f-image': 'image', 'f-alt': 'imageAlt', 'f-type': 'ogType', 'f-twcard': 'twitterCard', 'f-twsite': 'twitterSite', 'f-locale': 'locale', 'f-theme': 'themeColor', 'f-robots': 'robots' }[id];
+        if (d[key] != null) $(id).value = d[key];
+      });
+    } catch (e) {}
+  }
+  function domainOf(url) {
+    var m = String(url || '').trim().match(/^https?:\/\/([^/]+)/i);
+    if (!m) return '';
+    return m[1].replace(/^www\./i, '');
+  }
+  function setImgBox(el, url, emptyText) {
+    if (url && isAbsoluteUrl(url)) {
+      el.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = url; img.alt = ''; img.loading = 'lazy';
+      img.className = 'w-full h-full object-cover';
+      img.onerror = function () {
+        el.innerHTML = '';
+        el.textContent = '⚠ Image failed to load — check the URL.';
+        el.className = el.className;
+      };
+      el.appendChild(img);
+    } else {
+      el.innerHTML = '';
+      el.textContent = emptyText;
+    }
+  }
+
+  function render() {
+    var f = readForm();
+    var ls = lengthStatus(f.title, f.description);
+
+    // counters
+    var ct = $('c-title'), cd = $('c-desc');
+    ct.textContent = ls.titleLen + ' / 60';
+    cd.textContent = ls.descLen + ' / 160';
+    ct.className = 'font-mono ' + (ls.titleWarn ? 'text-amber-300 font-bold' : 'text-slate-400');
+    cd.className = 'font-mono ' + (ls.descWarn ? 'text-amber-300 font-bold' : 'text-slate-400');
+
+    // image checker
+    var chk = checkImageUrl(f.image);
+    var box = $('img-check');
+    box.innerHTML = '';
+    chk.messages.forEach(function (m) {
+      var p = document.createElement('p');
+      p.className = chk.state === 'ok' ? 'text-emerald-300' : (chk.state === 'empty' ? 'text-slate-500' : 'text-amber-300');
+      p.textContent = (chk.state === 'ok' ? '✓ ' : (chk.state === 'empty' ? '· ' : '⚠ ')) + m;
+      box.appendChild(p);
+    });
+
+    // score
+    var sc = scoreMeta(f);
+    $('score-num').textContent = sc.score;
+    $('score-ring').style.strokeDashoffset = String(213.6 * (1 - sc.score / 100));
+    var ul = $('score-list');
+    ul.innerHTML = '';
+    sc.checks.forEach(function (c) {
+      var li = document.createElement('li');
+      li.className = 'flex items-start gap-2 ' + (c.pass ? 'text-slate-400' : 'text-amber-200');
+      li.title = c.tip;
+      li.innerHTML = '<span class="mt-0.5 shrink-0">' + (c.pass
+        ? '<svg width="14" height="14" viewBox="0 0 20 20" fill="#34D399"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 00-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clip-rule="evenodd"/></svg>'
+        : '<svg width="14" height="14" viewBox="0 0 20 20" fill="#FBBF24"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>') + '</span><span><strong class="font-semibold">' + escHtml(c.label) + '</strong>' + (c.pass ? '' : '<br><span class="text-slate-500">' + escHtml(c.tip) + '</span>') + '</span>';
+      ul.appendChild(li);
+    });
+
+    // SERP
+    var dom = domainOf(f.url) || 'example.com';
+    $('serp-site').textContent = f.siteName.trim() || dom;
+    $('serp-url').textContent = (f.url.trim() || 'https://example.com/page').replace(/^https?:\/\//i, '').replace(/\/$/, '').split('/').join(' › ');
+    $('serp-fav').textContent = (f.siteName.trim() || dom).charAt(0).toUpperCase();
+    $('serp-title').textContent = f.title.trim() || 'Your page title appears here';
+    $('serp-desc').textContent = f.description.trim() || 'Your meta description appears here, roughly as Google would show it in search results.';
+    $('serp-warn').classList.toggle('hidden', !(ls.titleWarn || ls.descWarn));
+
+    // social cards
+    var t = f.title.trim() || 'Your page title appears here';
+    var d = f.description.trim() || 'Your description appears here.';
+    $('fb-domain').textContent = dom;
+    $('fb-title').textContent = t; $('fb-desc').textContent = d;
+    setImgBox($('fb-img'), f.image, 'No og:image — add one to control this preview');
+    $('x-title').textContent = t; $('x-desc').textContent = d; $('x-domain').textContent = '🔗 ' + dom;
+    setImgBox($('x-img'), f.image, 'No twitter:image — add one for a large card');
+    $('li-site').textContent = f.siteName.trim() || 'Your Site';
+    $('li-title').textContent = t; $('li-domain').textContent = dom;
+    setImgBox($('li-img'), f.image, 'No og:image — add one to control this preview');
+
+    // code tabs
+    var code = activeTab === 'meta' ? buildMetaTags(f)
+      : activeTab === 'org' ? buildJsonLd(f, 'organization')
+      : activeTab === 'article' ? buildJsonLd(f, 'article')
+      : activeTab === 'next' ? buildNextMeta(f)
+      : buildNuxtHead(f);
+    $('code-out').textContent = code;
+    $('code-filename').textContent = activeTab === 'meta' ? '<head> snippet'
+      : activeTab === 'org' ? 'JSON-LD · Organization'
+      : activeTab === 'article' ? 'JSON-LD · Article'
+      : activeTab === 'next' ? 'app/layout.js · metadata'
+      : 'Nuxt · useHead()';
+  }
+
+  // tabs
+  Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function (btn) {
+    btn.addEventListener('click', function () {
+      activeTab = btn.getAttribute('data-tab');
+      Array.prototype.forEach.call(document.querySelectorAll('.tab-btn'), function (b) {
+        var on = b === btn;
+        b.classList.toggle('tab-active', on);
+        b.classList.toggle('text-slate-300', !on);
+      });
+      $('copy-msg').textContent = '';
+      render();
+    });
+  });
+
+  function currentCode() { return $('code-out').textContent; }
+  $('btn-copy').addEventListener('click', function () {
+    var done = function () { $('copy-msg').textContent = '✓ Copied to clipboard.'; setTimeout(function () { $('copy-msg').textContent = ''; }, 2500); };
+    var fail = function () { $('copy-msg').textContent = 'Copy failed — select the code manually.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(currentCode()).then(done, fail);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = currentCode(); document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { fail(); }
+      document.body.removeChild(ta);
+    }
+  });
+  $('btn-download').addEventListener('click', function () {
+    var names = { meta: 'ogcraft-meta-tags.html', org: 'ogcraft-jsonld-organization.json', article: 'ogcraft-jsonld-article.json', next: 'ogcraft-nextjs-metadata.js', nuxt: 'ogcraft-nuxt-usehead.js' };
+    var blob = new Blob([currentCode()], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = names[activeTab] || 'ogcraft-snippet.txt';
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+
+  $('btn-sample').addEventListener('click', function () {
+    $('f-title').value = 'The Ultimate Sourdough Guide: From Starter to First Loaf';
+    $('f-desc').value = 'Learn to bake bakery-quality sourdough at home with our 7-day starter schedule, step-by-step folding method, and troubleshooting chart.';
+    $('f-url').value = 'https://example.com/sourdough-guide';
+    $('f-site').value = 'Crumb & Craft';
+    $('f-image').value = 'https://example.com/images/sourdough-cover.jpg';
+    $('f-alt').value = 'Fresh sourdough loaf with an ear, on a wooden board';
+    $('f-type').value = 'article';
+    $('f-twcard').value = 'summary_large_image';
+    $('f-twsite').value = '@crumbandcraft';
+    $('f-locale').value = 'en_US';
+    render(); saveForm();
+  });
+  $('btn-clear').addEventListener('click', function () {
+    FIELDS.forEach(function (id) {
+      var el = $(id);
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else if (id === 'f-theme') el.value = '#6D28D9';
+      else if (id === 'f-locale') el.value = 'en_US';
+      else el.value = '';
+    });
+    try { localStorage.removeItem('ogcraft-form-v1'); } catch (e) {}
+    render();
+  });
+
+  FIELDS.forEach(function (id) {
+    $(id).addEventListener('input', function () { render(); saveForm(); });
+    $(id).addEventListener('change', function () { render(); saveForm(); });
+  });
+
+  loadForm();
+  render();
+})();
+</script>
+</body>
+</html>
